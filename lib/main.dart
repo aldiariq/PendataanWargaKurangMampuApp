@@ -6,13 +6,15 @@ void main() {
 }
 
 class PendataanWargaKurangMampuApp extends StatelessWidget {
-
   final RouteApp routeApp;
 
   const PendataanWargaKurangMampuApp({Key key, this.routeApp}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: routeApp.generateRoute,
+    );
   }
 }
