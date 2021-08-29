@@ -1,0 +1,1 @@
+const NAMA_APLIKASI = "Pendataan Warga Kurang Mampu";
