@@ -10,13 +10,13 @@ class HalamanSplashscreen extends StatelessWidget {
     BlocProvider.of<SplashscreenCubit>(context).jalankanTimer();
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: BlocBuilder<SplashscreenCubit, SplashscreenState>(
-        builder: (context, state){
-          if(state is SelesaiSplash){
-            return HalamanMasuk();
+      body: BlocListener<SplashscreenCubit, SplashscreenState>(
+        listener: (context, state) {
+          if(state is SelesaiSplash) {
+            Navigator.pushReplacementNamed(context, HALAMAN_MASUK);
           }
-          return _splashScreen(context);
         },
+        child: _splashScreen(context),
       ),
     );
   }

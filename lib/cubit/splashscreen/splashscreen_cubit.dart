@@ -8,7 +8,7 @@ part 'splashscreen_state.dart';
 class SplashscreenCubit extends Cubit<SplashscreenState> {
   SplashscreenCubit() : super(SplashscreenInitial());
 
-  void jalankanTimer() {
+  void jalankanTimer() async {
     Timer(Duration(seconds: 5), (){
       emit(SelesaiSplash());
     });
