@@ -5,4 +5,6 @@ abstract class SplashscreenState {}
 
 class SplashscreenInitial extends SplashscreenState {}
 
-class FinishSplash extends SplashscreenState {}
+class MulaiSplash extends SplashscreenState {}
+
+class SelesaiSplash extends SplashscreenState {}

@@ -1,4 +1,5 @@
 import 'package:apppendataanwargakurangmampu/constants/strings.dart';
+import 'package:apppendataanwargakurangmampu/presentation/halaman_masuk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apppendataanwargakurangmampu/cubit/splashscreen/splashscreen_cubit.dart';
@@ -11,27 +12,31 @@ class HalamanSplashscreen extends StatelessWidget {
       backgroundColor: Colors.blue,
       body: BlocBuilder<SplashscreenCubit, SplashscreenState>(
         builder: (context, state){
-          if(!(state is SplashscreenInitial)){
-            Navigator.pushNamed(context, HALAMAN_MASUK);
+          if(state is SelesaiSplash){
+            return HalamanMasuk();
           }
-          return Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _gambarSplash(),
-                  _widgetPadding(),
-                  _widgetLoading(),
-                  _widgetPadding(),
-                  _tulisanSplash("Aplikasi\nPendataan Warga Kurang Mampu", 20),
-                ],
-              ),
-            ),
-          );
+          return _splashScreen(context);
         },
+      ),
+    );
+  }
+
+  Widget _splashScreen(context){
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            _gambarSplash(),
+            _widgetPadding(),
+            _widgetLoading(),
+            _widgetPadding(),
+            _tulisanSplash("Aplikasi\nPendataan Warga Kurang Mampu", 20),
+          ],
+        ),
       ),
     );
   }
