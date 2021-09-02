@@ -1,5 +1,4 @@
 import 'package:apppendataanwargakurangmampu/constants/strings.dart';
-import 'package:apppendataanwargakurangmampu/presentation/halaman_masuk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:apppendataanwargakurangmampu/cubit/splashscreen/splashscreen_cubit.dart';
@@ -34,7 +33,7 @@ class HalamanSplashscreen extends StatelessWidget {
             _widgetPadding(),
             _widgetLoading(),
             _widgetPadding(),
-            _tulisanSplash("Aplikasi\nPendataan Warga Kurang Mampu", 20),
+            _tulisanSplash("Aplikasi\nPendataan Warga Kurang Mampu", 30),
           ],
         ),
       ),
