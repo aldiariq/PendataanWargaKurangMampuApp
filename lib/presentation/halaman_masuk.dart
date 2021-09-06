@@ -17,13 +17,13 @@ class HalamanMasuk extends StatelessWidget {
       body: BlocListener<HalamanmasukCubit, HalamanmasukState>(
         listener: (context, state){
           if(state is PeringatanMasuk){
-            Toast.show(state.peringatan, context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
+            _widgetToast(context, state.peringatan);
           }else if(state is ProsesMasuk){
-            Toast.show("Mohon Tunggu Sebentar", context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
+            _widgetToast(context, "Mohon Tunggu Sebentar");
           }else if(state is SelesaiProsesMasuk) {
-            Toast.show("Berhasil Login", context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
+            _widgetToast(context, "Berhasil Login");
             dataLogin = state.dataLogin;
-            Toast.show("Selamat Datang, " + dataLogin.admin.name, context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
+            _widgetToast(context, "Selamat Datang, " + dataLogin.admin.name);
           }
         },
         child: _isiHalaman(context),
@@ -216,5 +216,10 @@ class HalamanMasuk extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _widgetToast(context, String kata){
+    FocusManager.instance.primaryFocus.unfocus();
+    Toast.show(kata, context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
   }
 }
