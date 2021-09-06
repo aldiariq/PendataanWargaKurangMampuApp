@@ -1,20 +1,24 @@
 import 'package:apppendataanwargakurangmampu/constants/strings.dart';
+import 'package:apppendataanwargakurangmampu/cubit/halamanmasuk/halamanmasuk_cubit.dart';
+import 'package:apppendataanwargakurangmampu/cubit/splashscreen/splashscreen_cubit.dart';
+import 'package:apppendataanwargakurangmampu/network/network_service.dart';
 import 'package:apppendataanwargakurangmampu/presentation/halaman_masuk.dart';
 import 'package:apppendataanwargakurangmampu/presentation/halaman_splash_screen.dart';
+import 'package:apppendataanwargakurangmampu/repository/repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:apppendataanwargakurangmampu/cubit/splashscreen/splashscreen_cubit.dart';
-import 'package:apppendataanwargakurangmampu/cubit/halamanmasuk/halamanmasuk_cubit.dart';
 
 class RouteApp {
 
   SplashscreenCubit splashscreenCubit;
   HalamanmasukCubit halamanMasukCubit;
+  Repository repository;
 
   RouteApp(){
+    repository = Repository(NetworkService());
     splashscreenCubit = SplashscreenCubit();
-    halamanMasukCubit = HalamanmasukCubit();
+    halamanMasukCubit = HalamanmasukCubit(repository);
   }
 
   Route generateRoute(RouteSettings routeSettings){
