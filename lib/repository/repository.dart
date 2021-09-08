@@ -15,8 +15,10 @@ class Repository{
       };
 
       final datahasilLogin = await networkService.fungsiLogin(dataLogin);
+      print(datahasilLogin);
       return Login.fromJson(datahasilLogin);
     }catch(e){
+      print("kesalahan : " + e.toString());
       return null;
     }
   }

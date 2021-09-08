@@ -1,7 +1,9 @@
 import 'package:apppendataanwargakurangmampu/constants/strings.dart';
 import 'package:apppendataanwargakurangmampu/cubit/halamanmasuk/halamanmasuk_cubit.dart';
 import 'package:apppendataanwargakurangmampu/cubit/splashscreen/splashscreen_cubit.dart';
+import 'package:apppendataanwargakurangmampu/cubit/halamandashboard/halamandashboard_cubit.dart';
 import 'package:apppendataanwargakurangmampu/network/network_service.dart';
+import 'package:apppendataanwargakurangmampu/presentation/halaman_dashboard.dart';
 import 'package:apppendataanwargakurangmampu/presentation/halaman_masuk.dart';
 import 'package:apppendataanwargakurangmampu/presentation/halaman_splash_screen.dart';
 import 'package:apppendataanwargakurangmampu/repository/repository.dart';
@@ -13,12 +15,14 @@ class RouteApp {
 
   SplashscreenCubit splashscreenCubit;
   HalamanmasukCubit halamanMasukCubit;
+  HalamandashboardCubit halamandashboardCubit;
   Repository repository;
 
   RouteApp(){
     repository = Repository(NetworkService());
     splashscreenCubit = SplashscreenCubit();
     halamanMasukCubit = HalamanmasukCubit(repository);
+    halamandashboardCubit = HalamandashboardCubit();
   }
 
   Route generateRoute(RouteSettings routeSettings){
@@ -34,7 +38,10 @@ class RouteApp {
           child: HalamanMasuk(),
         ));
       case HALAMAN_DASHBOARD:
-        return null;
+        return MaterialPageRoute(builder: (_) => BlocProvider.value(
+          value: halamandashboardCubit,
+          child: HalamanDashboard(),
+        ));
       case HALAMAN_RUKUN_TETANGGA:
         return null;
       case HALAMAN_MASYARAKAT:

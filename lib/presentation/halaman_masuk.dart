@@ -18,7 +18,7 @@ class HalamanMasuk extends StatelessWidget {
       print(dataLoginsharedpred.token);
       if(dataLoginsharedpred.status){
         _widgetToast(context, "Selamat Datang, " + dataLoginsharedpred.admin.name);
-        Navigator.pushReplacementNamed(context, HALAMAN_SPLASH_SCREEN);
+        Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
       }
     });
 
@@ -32,6 +32,7 @@ class HalamanMasuk extends StatelessWidget {
             }else if(state is SelesaiProsesMasuk) {
               _widgetToast(context, "Berhasil Login");
               sharedpref.setDatalogin(state.dataLogin);
+              Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
             }
           },
           child: _isiHalaman(context),
