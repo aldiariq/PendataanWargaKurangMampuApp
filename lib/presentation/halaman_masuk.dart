@@ -15,8 +15,7 @@ class HalamanMasuk extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     sharedpref.getDatalogin().then((dataLoginsharedpred){
-      print(dataLoginsharedpred.token);
-      if(dataLoginsharedpred.status){
+      if(dataLoginsharedpred != null && dataLoginsharedpred.status){
         _widgetToast(context, "Selamat Datang, " + dataLoginsharedpred.admin.name);
         Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
       }

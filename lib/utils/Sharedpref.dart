@@ -16,9 +16,13 @@ class Sharedpref {
   Future<Login> getDatalogin() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     _rawdataLogin = sharedPreferences.getString("data_login");
-    Map<String, dynamic> decodedataLogin = jsonDecode(_rawdataLogin);
-    Login dataLogin = Login.fromJson(decodedataLogin);
-    return dataLogin;
+    if(_rawdataLogin != null){
+      Map<String, dynamic> decodedataLogin = jsonDecode(_rawdataLogin);
+      Login dataLogin = Login.fromJson(decodedataLogin);
+      return dataLogin;
+    }else {
+      return null;
+    }
   }
 
   void clearDatalogin() async {
