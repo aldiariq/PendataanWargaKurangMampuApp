@@ -1,5 +1,6 @@
+import 'package:apppendataanwargakurangmampu/constants/strings.dart';
 import 'package:apppendataanwargakurangmampu/cubit/halamanmasuk/halamanmasuk_cubit.dart';
-import 'package:apppendataanwargakurangmampu/model/login_model.dart';
+import 'package:apppendataanwargakurangmampu/utils/Sharedpref.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,25 +10,32 @@ class HalamanMasuk extends StatelessWidget {
 
   final _controllerEmail = TextEditingController();
   final _controllerPassword = TextEditingController();
-  Login dataLogin = Login();
+  Sharedpref sharedpref = Sharedpref();
 
   @override
   Widget build(BuildContext context) {
+    sharedpref.getDatalogin().then((dataLoginsharedpred){
+      print(dataLoginsharedpred.token);
+      if(dataLoginsharedpred.status){
+        _widgetToast(context, "Selamat Datang, " + dataLoginsharedpred.admin.name);
+        Navigator.pushReplacementNamed(context, HALAMAN_SPLASH_SCREEN);
+      }
+    });
+
     return Scaffold(
-      body: BlocListener<HalamanmasukCubit, HalamanmasukState>(
-        listener: (context, state){
-          if(state is PeringatanMasuk){
-            _widgetToast(context, state.peringatan);
-          }else if(state is ProsesMasuk){
-            _widgetToast(context, "Mohon Tunggu Sebentar");
-          }else if(state is SelesaiProsesMasuk) {
-            _widgetToast(context, "Berhasil Login");
-            dataLogin = state.dataLogin;
-            _widgetToast(context, "Selamat Datang, " + dataLogin.admin.name);
-          }
-        },
-        child: _isiHalaman(context),
-      )
+        body: BlocListener<HalamanmasukCubit, HalamanmasukState>(
+          listener: (context, state){
+            if(state is PeringatanMasuk){
+              _widgetToast(context, state.peringatan);
+            }else if(state is ProsesMasuk){
+              _widgetToast(context, "Mohon Tunggu Sebentar");
+            }else if(state is SelesaiProsesMasuk) {
+              _widgetToast(context, "Berhasil Login");
+              sharedpref.setDatalogin(state.dataLogin);
+            }
+          },
+          child: _isiHalaman(context),
+        )
     );
   }
 
