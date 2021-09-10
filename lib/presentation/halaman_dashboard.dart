@@ -1,12 +1,10 @@
 import 'package:apppendataanwargakurangmampu/constants/strings.dart';
-import 'package:apppendataanwargakurangmampu/utils/Sharedpref.dart';
+import 'package:apppendataanwargakurangmampu/cubit/halamandashboard/halamandashboard_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toast/toast.dart';
 
 class HalamanDashboard extends StatelessWidget {
-
-  Sharedpref sharedpref = Sharedpref();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,10 +12,16 @@ class HalamanDashboard extends StatelessWidget {
       appBar: AppBar(
         title: Text("Dashboard"),
       ),
+      body: BlocListener<HalamandashboardCubit, HalamandashboardState>(
+        listener: (context, state) {
+          print("STATE " + state.toString());
+        },
+        child: Container(),
+      ),
     );
   }
 
-  Widget _navDrawer(context){
+  Widget _navDrawer(context) {
     return Drawer(
       child: Material(
         color: Colors.blue,
@@ -26,17 +30,34 @@ class HalamanDashboard extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               widgetJarak(48),
-              menuItem("Dashboard", Icons.dashboard_outlined, () => alihkanHalaman(context, 0)),
+              menuItem(
+                  "Dashboard",
+                  Icons.dashboard_outlined,
+                  () => _aksialihkanHalaman(
+                      context, HALAMAN_DASHBOARD, "Halaman Dashboard")),
               widgetJarak(5),
-              menuItem("Rukun Tetangga", Icons.person_outline, () => alihkanHalaman(context, 1)),
+              menuItem(
+                  "Rukun Tetangga",
+                  Icons.person_outline,
+                  () => _aksialihkanHalaman(
+                      context, HALAMAN_DASHBOARD, "Halaman Rukun Tetangga")),
               widgetJarak(5),
-              menuItem("Masyarakat", Icons.people_outline, () => alihkanHalaman(context, 2)),
+              menuItem(
+                  "Masyarakat",
+                  Icons.people_outline,
+                  () => _aksialihkanHalaman(
+                      context, HALAMAN_DASHBOARD, "Halaman Masyarakat")),
               widgetJarak(5),
-              menuItem("Ganti Password", Icons.password_outlined, () => alihkanHalaman(context, 3)),
+              menuItem(
+                  "Ganti Password",
+                  Icons.password_outlined,
+                  () => _aksialihkanHalaman(
+                      context, HALAMAN_DASHBOARD, "Halaman Ganti Password")),
               widgetJarak(5),
               Divider(color: Colors.white),
               widgetJarak(5),
-              menuItem("Keluar", Icons.login_outlined, () => alihkanHalaman(context, 4)),
+              menuItem(
+                  "Keluar", Icons.login_outlined, () => _dialogKeluar(context)),
             ],
           ),
         ),
@@ -44,13 +65,13 @@ class HalamanDashboard extends StatelessWidget {
     );
   }
 
-  Widget widgetJarak(double jarak){
+  Widget widgetJarak(double jarak) {
     return SizedBox(
       height: jarak,
     );
   }
 
-  Widget menuItem(String menu, IconData menuicon, VoidCallback callbackMenu){
+  Widget menuItem(String menu, IconData menuicon, VoidCallback callbackMenu) {
     final warnamenuicon = Colors.white;
     return ListTile(
       leading: Icon(menuicon, color: warnamenuicon),
@@ -59,38 +80,23 @@ class HalamanDashboard extends StatelessWidget {
     );
   }
 
-  void alihkanHalaman(BuildContext context, int kodeMenu) {
-    switch(kodeMenu){
-      case 0:
-        _widgetToast(context, "Halaman Dashboard");
-        Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        break;
-      case 1:
-        _widgetToast(context, "Halaman Rukun Tetangga");
-        Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        break;
-      case 2:
-        _widgetToast(context, "Halaman Masyarakat");
-        Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        break;
-      case 3:
-        _widgetToast(context, "Halaman Ganti Password");
-        Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        break;
-      case 4:
-        _showDialog(context);
-        break;
-    }
+  void _aksialihkanHalaman(context, String routeName, String peringatan) {
+    _widgetToast(context, peringatan);
+    Navigator.pushReplacementNamed(context, routeName);
   }
 
-  Widget _widgetToast(context, String kata){
+  void _widgetToast(context, String kata) {
     FocusManager.instance.primaryFocus.unfocus();
-    Toast.show(kata, context, duration: Toast.LENGTH_SHORT, backgroundColor: Colors.white, textColor: Colors.black, gravity: Toast.BOTTOM);
+    Toast.show(kata, context,
+        duration: Toast.LENGTH_SHORT,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        gravity: Toast.BOTTOM);
   }
 
-  void _showDialog(context) {
+  void _dialogKeluar(contextroot) {
     showDialog(
-      context: context,
+      context: contextroot,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Konfirmasi Keluar'),
@@ -101,10 +107,10 @@ class HalamanDashboard extends StatelessWidget {
               child: const Text('Tidak'),
             ),
             TextButton(
-              onPressed: (){
-                sharedpref.clearDatalogin();
-                _widgetToast(context, "Berhasil Keluar");
-                Navigator.pushReplacementNamed(context, HALAMAN_MASUK);
+              onPressed: () {
+                BlocProvider.of<HalamandashboardCubit>(contextroot)
+                    .clearSharedprefcubit();
+                _aksialihkanHalaman(context, HALAMAN_MASUK, "Berhasil Keluar");
               },
               child: const Text('Ya'),
             ),
@@ -113,6 +119,4 @@ class HalamanDashboard extends StatelessWidget {
       },
     );
   }
-
 }
-
