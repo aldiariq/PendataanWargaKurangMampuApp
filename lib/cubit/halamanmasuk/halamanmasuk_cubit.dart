@@ -38,13 +38,12 @@ class HalamanmasukCubit extends Cubit<HalamanmasukState> {
     }
   }
 
-  bool getDatalogin() {
-    sharedpref.getDatalogin().then((dataLoginsharedpred) {
+  void getDatalogin() async {
+    await sharedpref.getDatalogin().then((dataLoginsharedpred) {
       if (dataLoginsharedpred != null && dataLoginsharedpred.status) {
-        return true;
+        emit(SelesaiProsesMasukSharedpred());
       }
     });
-    return false;
   }
 
   void setDatalogin(Login dataLogin) {

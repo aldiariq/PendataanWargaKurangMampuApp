@@ -11,12 +11,7 @@ class HalamanMasuk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dataLogin = BlocProvider.of<HalamanmasukCubit>(context).getDatalogin();
-
-    if (dataLogin) {
-      _widgetToast(context, "Selamat Datang");
-      Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-    }
+    BlocProvider.of<HalamanmasukCubit>(context).getDatalogin();
 
     return Scaffold(
         body: BlocListener<HalamanmasukCubit, HalamanmasukState>(
@@ -29,6 +24,8 @@ class HalamanMasuk extends StatelessWidget {
           _widgetToast(context, "Berhasil Login");
           BlocProvider.of<HalamanmasukCubit>(context)
               .setDatalogin(state.dataLogin);
+          Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
+        } else if (state is SelesaiProsesMasukSharedpred) {
           Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
         }
       },
