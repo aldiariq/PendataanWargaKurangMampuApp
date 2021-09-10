@@ -7,17 +7,49 @@ import 'package:toast/toast.dart';
 class HalamanDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<HalamandashboardCubit>(context).setDatalogin();
+
     return Scaffold(
       drawer: _navDrawer(context),
       appBar: AppBar(
         title: Text("Dashboard"),
       ),
-      body: BlocListener<HalamandashboardCubit, HalamandashboardState>(
-        listener: (context, state) {
-          print("STATE " + state.toString());
-        },
-        child: Container(),
-      ),
+      body: Container(),
+    );
+  }
+
+  Widget _navDrawerHeader() {
+    final warnamenuicon = Colors.white;
+    return BlocBuilder<HalamandashboardCubit, HalamandashboardState>(
+      builder: (context, state) {
+        String email = "";
+        String name = "";
+        if (state is HalamandashboardsetDatalogin) {
+          email = state.dataLogin.admin.email;
+          name = state.dataLogin.admin.name;
+        }
+        return InkWell(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                CircleAvatar(
+                    radius: 30,
+                    backgroundImage: AssetImage('assets/images/logoadmin.png')),
+                SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(email, style: TextStyle(color: warnamenuicon)),
+                    const SizedBox(height: 4),
+                    Text(name, style: TextStyle(color: warnamenuicon)),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -29,7 +61,10 @@ class HalamanDashboard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             children: <Widget>[
-              widgetJarak(48),
+              widgetJarak(30),
+              _navDrawerHeader(),
+              widgetJarak(10),
+              Divider(color: Colors.white),
               menuItem(
                   "Dashboard",
                   Icons.dashboard_outlined,

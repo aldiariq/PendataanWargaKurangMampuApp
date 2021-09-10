@@ -24,7 +24,7 @@ class RouteApp {
     sharedpref = Sharedpref();
     splashscreenCubit = SplashscreenCubit();
     halamanMasukCubit = HalamanmasukCubit(repository, sharedpref);
-    halamandashboardCubit = HalamandashboardCubit();
+    halamandashboardCubit = HalamandashboardCubit(sharedpref);
   }
 
   Route generateRoute(RouteSettings routeSettings) {
