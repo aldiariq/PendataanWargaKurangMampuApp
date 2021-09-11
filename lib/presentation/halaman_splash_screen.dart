@@ -8,10 +8,10 @@ class HalamanSplashscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     BlocProvider.of<SplashscreenCubit>(context).jalankanTimer();
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: WARNA_UTAMA,
       body: BlocListener<SplashscreenCubit, SplashscreenState>(
         listener: (context, state) {
-          if(state is SelesaiSplash) {
+          if (state is SelesaiSplash) {
             Navigator.pushReplacementNamed(context, HALAMAN_MASUK);
           }
         },
@@ -20,7 +20,7 @@ class HalamanSplashscreen extends StatelessWidget {
     );
   }
 
-  Widget _splashScreen(context){
+  Widget _splashScreen(context) {
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -40,40 +40,32 @@ class HalamanSplashscreen extends StatelessWidget {
     );
   }
 
-  Widget _gambarSplash(){
+  Widget _gambarSplash() {
     return Center(
-      child: Image.asset(
-          "assets/images/logoaplikasi.png",
-        height: 100,
-        width: 100,
-      )
-    );
+        child: Image.asset(
+      "assets/images/logoaplikasi.png",
+      height: 100,
+      width: 100,
+    ));
   }
 
-  Widget _tulisanSplash(String tulisan, double besarHuruf){
+  Widget _tulisanSplash(String tulisan, double besarHuruf) {
     return Center(
-      child: Text(
-        tulisan,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontFamily: 'Staatliches',
-          color: Colors.white,
-          fontSize: besarHuruf
-        ),
-      )
-    );
+        child: Text(
+      tulisan,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          fontFamily: 'Staatliches', color: Colors.white, fontSize: besarHuruf),
+    ));
   }
 
-  Widget _widgetPadding(){
+  Widget _widgetPadding() {
     return Padding(
-      padding: EdgeInsets.only(
-        top: 30,
-        bottom: 30
-      ),
+      padding: EdgeInsets.only(top: 30, bottom: 30),
     );
   }
 
-  Widget _widgetLoading(){
+  Widget _widgetLoading() {
     return Center(
       child: CircularProgressIndicator(
         backgroundColor: Colors.white,

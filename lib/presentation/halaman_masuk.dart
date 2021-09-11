@@ -14,23 +14,24 @@ class HalamanMasuk extends StatelessWidget {
     BlocProvider.of<HalamanmasukCubit>(context).getDatalogin();
 
     return Scaffold(
+        backgroundColor: WARNA_UTAMA,
         body: BlocListener<HalamanmasukCubit, HalamanmasukState>(
-      listener: (context, state) {
-        if (state is PeringatanMasuk) {
-          _widgetToast(context, state.peringatan);
-        } else if (state is ProsesMasuk) {
-          _widgetToast(context, "Mohon Tunggu Sebentar");
-        } else if (state is SelesaiProsesMasuk) {
-          _widgetToast(context, "Berhasil Login");
-          BlocProvider.of<HalamanmasukCubit>(context)
-              .setDatalogin(state.dataLogin);
-          Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        } else if (state is SelesaiProsesMasukSharedpred) {
-          Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
-        }
-      },
-      child: _isiHalaman(context),
-    ));
+          listener: (context, state) {
+            if (state is PeringatanMasuk) {
+              _widgetToast(context, state.peringatan);
+            } else if (state is ProsesMasuk) {
+              _widgetToast(context, "Mohon Tunggu Sebentar");
+            } else if (state is SelesaiProsesMasuk) {
+              _widgetToast(context, "Berhasil Login");
+              BlocProvider.of<HalamanmasukCubit>(context)
+                  .setDatalogin(state.dataLogin);
+              Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
+            } else if (state is SelesaiProsesMasukSharedpred) {
+              Navigator.pushReplacementNamed(context, HALAMAN_DASHBOARD);
+            }
+          },
+          child: _isiHalaman(context),
+        ));
   }
 
   Widget widgetJarak(double jarak) {
@@ -137,14 +138,7 @@ class HalamanMasuk extends StatelessWidget {
             Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color(0xff0073e5),
-                    Color(0xcc0073e5),
-                  ])),
+              decoration: BoxDecoration(color: WARNA_UTAMA),
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),

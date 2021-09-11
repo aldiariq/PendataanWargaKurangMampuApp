@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.1
   toast: ^0.1.5
   shared_preferences: ^2.0.7
+  google_fonts: ^2.1.0
 
 flutter_icons:
   android: "launcher_icon"
@@ -58,6 +59,11 @@ flutter:
   assets:
     - assets/images/logoaplikasi.png
     - assets/images/logoadmin.png
+    - assets/images/dashboardicon.png
+    - assets/images/rukuntetanggaicon.png
+    - assets/images/masyarakaticon.png
+    - assets/images/gantipasswordicon.png
+    - assets/images/keluaricon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
