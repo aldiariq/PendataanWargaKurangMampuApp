@@ -33,84 +33,104 @@ class HalamanDashboard extends StatelessWidget {
   }
 
   Widget _isiHalaman(context, String name) {
-    return SafeArea(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        _widgetJarak(30),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Selamat Datang,",
-                            style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold)),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _widgetJarak(30),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Selamat Datang,",
+                              style: GoogleFonts.openSans(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            Text(
+                              name,
+                              style: GoogleFonts.openSans(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.normal)),
+                            ),
+                          ])),
+                  Padding(
+                      padding: EdgeInsets.only(right: 20),
+                      child: Column(children: <Widget>[
+                        InkWell(
+                          onTap: () {
+                            _dialogKeluar(context);
+                          },
+                          child: Image.asset(
+                            ICON_MENU_KELUAR,
+                            width: 50,
                           ),
-                          Text(
-                            name,
-                            style: GoogleFonts.openSans(
-                                textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.normal)),
-                          ),
-                        ])),
-                Padding(
-                    padding: EdgeInsets.only(right: 20),
-                    child: Column(children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          _dialogKeluar(context);
-                        },
-                        child: Image.asset(
-                          ICON_MENU_KELUAR,
-                          width: 50,
                         ),
-                      ),
-                    ])),
-              ],
-            ),
-            _widgetJarak(40),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Center(
-                child: Wrap(
-                  children: <Widget>[
-                    _widgetCard(context, ICON_MENU_DASHBOARD, MENU_DASHBOARD,
-                        HALAMAN_DASHBOARD, NAMA_HALAMAN_GANTI_PASSWORD),
-                    _widgetCard(
-                        context,
-                        ICON_MENU_RUKUN_TETANGGA,
-                        MENU_RUKUN_TETANGGA,
-                        HALAMAN_RUKUN_TETANGGA,
-                        NAMA_HALAMAN_RUKUN_TETANGGA),
-                    _widgetCard(context, ICON_MENU_MASYARAKAT, MENU_MASYARAKAT,
-                        HALAMAN_MASYARAKAT, NAMA_HALAMAN_MASYARAKAT),
-                    _widgetCard(
-                        context,
-                        ICON_MENU_GANTI_PASSWORD,
-                        MENU_GANTI_PASSWORD,
-                        HALAMAN_GANTI_PASSWORD,
-                        NAMA_HALAMAN_GANTI_PASSWORD),
-                  ],
-                ),
+                      ])),
+                ],
               ),
-            )
-          ],
-        )
-      ],
-    ));
+              _widgetJarak(40),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _widgetCard(
+                              context,
+                              ICON_MENU_DASHBOARD,
+                              MENU_DASHBOARD,
+                              HALAMAN_DASHBOARD,
+                              NAMA_HALAMAN_GANTI_PASSWORD),
+                          _widgetCard(
+                              context,
+                              ICON_MENU_RUKUN_TETANGGA,
+                              MENU_RUKUN_TETANGGA,
+                              HALAMAN_RUKUN_TETANGGA,
+                              NAMA_HALAMAN_RUKUN_TETANGGA),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          _widgetCard(
+                              context,
+                              ICON_MENU_MASYARAKAT,
+                              MENU_MASYARAKAT,
+                              HALAMAN_MASYARAKAT,
+                              NAMA_HALAMAN_MASYARAKAT),
+                          _widgetCard(
+                              context,
+                              ICON_MENU_GANTI_PASSWORD,
+                              MENU_GANTI_PASSWORD,
+                              HALAMAN_GANTI_PASSWORD,
+                              NAMA_HALAMAN_GANTI_PASSWORD),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Widget _widgetCard(context, String imageAsset, String menuName,

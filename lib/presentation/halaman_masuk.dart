@@ -122,7 +122,7 @@ class HalamanMasuk extends StatelessWidget {
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Center(
         child: Text(
-          "Simpan",
+          "Masuk",
           style: TextStyle(fontSize: 18, color: Colors.black),
         ),
       ),
