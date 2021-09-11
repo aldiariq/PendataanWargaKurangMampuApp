@@ -34,13 +34,13 @@ class HalamanMasuk extends StatelessWidget {
         ));
   }
 
-  Widget widgetJarak(double jarak) {
+  Widget _widgetJarak(double jarak) {
     return SizedBox(
       height: jarak,
     );
   }
 
-  Widget textfieldEmail() {
+  Widget _textfieldEmail() {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -75,7 +75,7 @@ class HalamanMasuk extends StatelessWidget {
         ]);
   }
 
-  Widget textfieldPassword() {
+  Widget _textfieldPassword() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -152,11 +152,16 @@ class HalamanMasuk extends StatelessWidget {
                           fontSize: 42,
                           fontWeight: FontWeight.bold),
                     ),
-                    widgetJarak(50),
-                    textfieldEmail(),
-                    widgetJarak(20),
-                    textfieldPassword(),
-                    widgetJarak(20),
+                    _widgetJarak(25),
+                    Image.asset(
+                      ICON_MENU_LOGIN,
+                      width: 100,
+                    ),
+                    _widgetJarak(40),
+                    _textfieldEmail(),
+                    _widgetJarak(20),
+                    _textfieldPassword(),
+                    _widgetJarak(20),
                     InkWell(
                         onTap: () {
                           final email = _controllerEmail.text;

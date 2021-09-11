@@ -64,6 +64,7 @@ flutter:
     - assets/images/masyarakaticon.png
     - assets/images/gantipasswordicon.png
     - assets/images/keluaricon.png
+    - assets/images/loginicon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

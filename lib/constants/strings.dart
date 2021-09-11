@@ -37,3 +37,4 @@ const ICON_MENU_RUKUN_TETANGGA = "assets/images/rukuntetanggaicon.png";
 const ICON_MENU_MASYARAKAT = "assets/images/masyarakaticon.png";
 const ICON_MENU_GANTI_PASSWORD = "assets/images/gantipasswordicon.png";
 const ICON_MENU_KELUAR = "assets/images/keluaricon.png";
+const ICON_MENU_LOGIN = "assets/images/loginicon.png";
